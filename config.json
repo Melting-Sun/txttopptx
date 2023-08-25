@@ -1,0 +1,37 @@
+{
+    "src": "./word.docx",
+    "args": "-f docx -t html5",
+    "pptxTemplate": "./trmp1.pptx",
+    "fontSize": 10,
+    "lineColor": "0000FF",
+    "lineWidth": 1.0,
+    "x": 400,
+    "y": 50,
+    "fontFace": "Alien Encounters",
+    "textColor": "CC0000",
+    "textWrap" : "none",
+    "textAlign": "center",
+    "textVerticalAlign" : "center",
+    "line": {
+        "color": "0000FF",
+        "dashType": "dash",
+        "width": 1.0
+      },
+     "margin": 0 ,
+     "xbody": 100,
+     "ybody": 150,
+     "fontFacebody": "Alien Encounters",
+     "textColorbody": "CC0000",
+     "textWrapbody" : "none",
+     "textAlignbody": "center",
+     "textVerticalAlignbody" : "center",
+     "linebody": {
+         "color": "0000FF",
+         "dashType": "dash",
+         "width": 1.0
+       },
+      "marginbody": 0, 
+      "savingPath" : "./new_presentationnnnnn.pptx"
+
+  }
+  
