@@ -1,10 +1,14 @@
 const { log } = require("console");
 var pandoc = require("node-pandoc");
-var src = "./word.docx";
+const fs = require("fs")
+
+var config = JSON.parse(fs.readFileSync('config.json'));
+
+var src = config.src
 var args = "-f docx -t html5";
 var outputString = "";
 
-// Set your first callback function
+
 var callback = function (err, result) {
   if (err) {
     console.error("Oh Nos: ", err);
@@ -55,7 +59,6 @@ pandoc(src, args, callback);
 
 
 
-console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44");
 
 
 var cheerio = require("cheerio");
@@ -127,23 +130,23 @@ function processHtml(result) {
 // Function to add elements to PowerPoint
 async function addElements(ulElements, h1Headings){
   let pptx = new PPTX.Composer();
-  await pptx.load('./trmp1.pptx');
+  await pptx.load(config.pptxTemplate);
 
   for(const [i, header] of h1Headings.entries()){
     await pptx.compose(async pres => {
       await pres.getSlide(i + 1).addText(text => {
         text
           .value(header)
-          .x(400)
-          .y(50)
-          .fontFace('Alien Encounters')
-          .fontSize(10)
-          .textColor('CC0000')
-          .textWrap('none')
-          .textAlign('center')
-          .textVerticalAlign('center')
-          .line({ color: '0000FF', dashType: 'dash', width: 1.0 })
-          .margin(0);
+          .x(config.x)
+          .y(config.y)
+          .fontFace(config.fontFace)
+          .fontSize(config.fontSize)
+          .textColor(config.textColor)
+          .textWrap(config.textWrap)
+          .textAlign(config.textAlign)
+          .textVerticalAlign(config.textVerticalAlign)
+          .line(config.line)
+          .margin(config.margin);
       });
     });
   }
@@ -153,20 +156,20 @@ async function addElements(ulElements, h1Headings){
       await pres.getSlide(i + 1).addText(text => {
         text
           .value(body)
-          .x(100)
-          .y(150)
-          .fontFace('Alien Encounters')
-          .fontSize(10)
-          .textColor('CC0000')
-          .textWrap('none')
-          .textAlign('center')
-          .textVerticalAlign('center')
-          .line({ color: '0000FF', dashType: 'dash', width: 1.0 })
-          .margin(0);
+          .x(config.xbody)
+          .y(config.ybody)
+          .fontFace(config.fontFacebody)
+          .fontSize(config.fontSizebody)
+          .textColor(config.textColorbody)
+          .textWrap(config.textWrapbody)
+          .textAlign(config.textAlignbody)
+          .textVerticalAlign(config.textVerticalAlignbody)
+          .line(config.linebody)
+          .margin(config.marginbody);
       });
     });
   }
 
-  await pptx.save('./new_presentation.pptx');
+  await pptx.save(config.savingPath);
   console.log('New presentation with headers saved!');
 }
